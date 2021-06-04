@@ -74,8 +74,9 @@ STATIC_URL = "/static/"
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # SECURITY WARNING: keep the secret key used in production secret!
+
 SECRET_KEY = config("SECRET_KEY")
 
 
@@ -115,7 +116,7 @@ DATABASES = {
         "USER": config("DB_USER"),
         "PASSWORD": config("DB_PASSWORD"),
         "HOST": "localhost",
-        "PORT": config("PORT"),
+        "PORT": 5432,
     }
 }
 
@@ -123,3 +124,4 @@ DATABASES = {
 prod_db = dj_database_url.config(conn_max_age=500)
 
 DATABASES["default"].update(prod_db)
+

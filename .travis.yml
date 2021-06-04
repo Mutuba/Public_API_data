@@ -1,0 +1,27 @@
+language: python
+# python versions
+python:
+  - "3.7.8"
+
+services:
+  - postgresql
+
+addons:
+  postgresql: "9.6"
+
+# install requirements
+install:
+  - pip install -r requirements.txt
+  - pip install coveralls
+
+before_script:
+  - psql -c "ALTER USER postgres PASSWORD 'myPassword';"
+  - psql -c 'create database travis_ci_test;' -U postgres
+
+# To run tests
+script:
+  - coverage run manage.py test
+
+# send coverage report to coveralls
+after_success:
+  coveralls

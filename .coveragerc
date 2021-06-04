@@ -1,0 +1,15 @@
+[run]
+source = .
+branch = False
+timid = True
+[report]
+show_missing = True
+include = *.py
+omit =
+    */site-packages/*
+    */migrations/*
+    *wsgi.py
+    *manage.py
+[html]
+title = Code Coverage
+directory = local_coverage_report
