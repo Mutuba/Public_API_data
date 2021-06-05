@@ -1,7 +1,14 @@
 #!/bin/bash
 
-sudo docker login --username $HEROKU_DOCKER_USERNAME --password $HEROKU_AUTH_TOKEN registry.heroku.com
+sudo docker login --username $DOCKER_USERNAME --password $DOCKER_AUTH_TOKEN registry.heroku.com
+
+
+# Push Dockerfile to DockerHub
+docker-compose build --pull
+docker-compose push
+
 sudo docker tag public_data_api_app:latest registry.heroku.com/publicapidataapp/web
+
 if [ $TRAVIS_BRANCH == "master" ] && [ $TRAVIS_PULL_REQUEST == "false" ]; then sudo docker push registry.heroku.com/publicapidataapp/web; fi
 
 chmod +x heroku-container-release.sh

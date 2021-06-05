@@ -1,29 +1,49 @@
-version: '3'
+version: "3.7"
 
 services:
-    db:
-        image: postgres
-        environment:
-            - DB_NAME=${DB_NAME}
-            - DB_USER=${DB_USER}
-            - DB_PASSWORD=${DB_PASSWORD}
-            - PORT=${PORT}
-            - SECRET_KEY=${SECRET_KEY}             
-    migration:
-        build: .
-        command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; python3 manage.py migrate'
-        volumes:
-            - .:/usr/src/app
-        depends_on:
-            - db
-    web:
-        build: .
-        image: public_data_api_app
-        command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; python3 manage.py runserver 0.0.0.0:8000'
-        volumes:
-            - .:/usr/src/app
-        ports:
-            - "8000:8000"
-        depends_on:
-            - db
-            - migration
+  web:
+    build: .
+    image: mutuba/public_data_api_app:latest
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 127.0.0.1:8000:8000
+    depends_on:
+      - db_postgres
+      - migrations
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  db_postgres:
+    image: postgres:12-alpine
+    container_name: public_data_api_app_db
+    volumes:
+      - postgres_data:/usr/local/var/postgres
+
+    ports:
+      - 5432:5432
+
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  migrations:
+    build: .
+    command: python3 manage.py migrate
+    volumes:
+      - .:/usr/src/app
+
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+    depends_on:
+      - db_postgres
+
+volumes:
+  postgres_data:

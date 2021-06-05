@@ -77,7 +77,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = config("SECRET_KEY")
+SECRET_KEY = '7!@8iekdn*_6e&x8m!mofryeaw775c&%-nc_)z)+p9w5@bw+(n'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -85,6 +85,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     # "authors-haven-api.herokuapp.com",
+    "localhost", "127.0.0.1"
 ]
 
 MIDDLEWARE = [
@@ -109,17 +110,28 @@ REST_FRAMEWORK = {
 }
 
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "NAME": config("POSTGRES_DB"),
+#         "USER": config("POSTGRES_USER"),
+#         "PASSWORD": config("POSTGRES_PASSWORD"),
+#         "HOST": config("HOST"),
+#         "PORT": config("PORT")
+#     }
+# }
+
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": config("DB_NAME"),
-        "USER": config("DB_USER"),
-        "PASSWORD": config("DB_PASSWORD"),
-        "HOST": "localhost",
-        "PORT": 5432,
+        "NAME": "postgres",
+        "USER": "postgres",
+        "PASSWORD": "postgres",
+        "HOST": "db_postgres",
+        "PORT": 5432
     }
 }
-
 
 prod_db = dj_database_url.config(conn_max_age=500)
 
