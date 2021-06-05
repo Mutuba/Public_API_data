@@ -1,45 +1,36 @@
-// language: python
-// # python versions
-// python:
-//   - "3.7.8"
-
-// services:
-//   - postgresql
-
-// addons:
-//   postgresql: "9.6"
-
-// # install requirements
-// install:
-//   - pip install -r requirements.txt
-//   - pip install coveralls
-
-// before_script:
-//   - psql -c "ALTER USER postgres PASSWORD 'myPassword';"
-//   - psql -c 'create database travis_ci_test;' -U postgres
-
-// # To run tests
-// script:
-//   - coverage run manage.py test
-
-// # send coverage report to coveralls
-// after_success:
-//   coveralls
-
+# config for (Django + Postgres) -> Docker -> Travis -> Heroku
 
 language: python
 python:
-    - 3.6
+  - 3.6
 services:
-    - docker
+  - docker
 #    - postgresql
+
 install:
-    - pip install -r requirements.txt
+  - pip install -r requirements.txt
+#before_script:
+#    - python manage.py collectstatic
+#    - psql -c 'create database testdb;' -U postgres
+#    - psql -c 'create database travisci;' -U postgres
+#    - psql -c "CREATE DATABASE testdb;" -U postgres
+#    - docker-compose run web python manage.py collectstatic
+
 script:
-    - docker-compose run web python manage.py test
+  #    - docker-compose build
+  #    - docker ps
+  #    - docker-compose run web python manage.py makemigrations
+  #    - docker-compose run web python manage.py migrate
+  - docker-compose run web python manage.py test
+
+  # travis without dockerization
+#    - python manage.py makemigrations
+#    - python manage.py migrate
+#    - python manage.py test
+
 deploy:
-    provider: script
-    script: bash docker_push.sh
-    skip_cleanup: true
-    on:
-        branch: master
+  provider: script
+  script: bash docker_push.sh
+  skip_cleanup: true
+  on:
+    branch: master

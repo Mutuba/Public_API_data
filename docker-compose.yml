@@ -7,7 +7,8 @@ services:
             - DB_NAME=${DB_NAME}
             - DB_USER=${DB_USER}
             - DB_PASSWORD=${DB_PASSWORD}
-            - PORT=${PORT}           
+            - PORT=${PORT}
+            - SECRET_KEY=${SECRET_KEY}             
     migration:
         build: .
         command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; python3 manage.py migrate'
