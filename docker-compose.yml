@@ -3,7 +3,8 @@ version: "3.7"
 services:
   web:
     build: .
-    image: mutuba/public_data_api_app:latest
+    image: mutuba/public_data_api_app
+    container_name: public_data_api_app_main
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/usr/src/app
@@ -16,6 +17,7 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - HOST=db_postgres
 
   db_postgres:
     image: postgres:12-alpine
@@ -30,10 +32,12 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - HOST=db_postgres
 
   migrations:
     build: .
     command: python3 manage.py migrate
+    container_name: public_data_api_app_migrations
     volumes:
       - .:/usr/src/app
 
@@ -41,6 +45,7 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - HOST=db_postgres
 
     depends_on:
       - db_postgres

@@ -10,6 +10,11 @@ omit =
     */migrations/*
     *wsgi.py
     *manage.py
+    *settings.py
+    *urls.py
+    */tests/
+    *apps/dogs/tests/*
 [html]
 title = Code Coverage
 directory = local_coverage_report
+
