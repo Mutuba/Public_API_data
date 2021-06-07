@@ -8,30 +8,11 @@ install:
   - pip install -r requirements.txt
 
 before_script:
-  # install heroku CLI
-  - wget -qO- https://toolbelt.heroku.com/install.sh | sh
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-
-  - docker login --username _ --password=$HEROKU_AUTH_TOKEN registry.heroku.com
-
   - pip install docker-compose
 
 script:
   - docker-compose run web coverage run manage.py test
-  - docker-compose build
-  - docker tag mutuba/public_data_api_app registry.heroku.com/$HEROKU_APP_NAME/web
 
 after_success:
   - coveralls
 
-deploy:
-  provider: script
-  script:
-    - docker push registry.heroku.com/$HEROKU_APP_NAME/web
-    # Push Dockerfile to DockerHub
-    - docker-compose build --pull
-    - docker-compose push
-    - heroku container: release web --app $HEROKU_APP_NAME
-  skip_cleanup: true
-  on:
-    branch: master

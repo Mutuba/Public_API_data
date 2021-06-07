@@ -3,7 +3,6 @@ set -e
 
 sudo docker login --username $HEROKU_USERNAME --password $HEROKU_AUTH_TOKEN registry.heroku.com
 
-
 # Push Dockerfile to DockerHub
 docker-compose build --pull
 docker-compose push

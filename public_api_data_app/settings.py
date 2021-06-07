@@ -65,7 +65,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
@@ -85,7 +84,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     # "authors-haven-api.herokuapp.com",
-    "localhost", "127.0.0.1"
+    "localhost", "127.0.0.1", "publicapidataapp.herokuapp.com"
 ]
 
 MIDDLEWARE = [
@@ -108,17 +107,6 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
     "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
 }
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "NAME": config("POSTGRES_DB"),
-#         "USER": config("POSTGRES_USER"),
-#         "PASSWORD": config("POSTGRES_PASSWORD"),
-#         "HOST": config("HOST"),
-#         "PORT": config("PORT")
-#     }
-# }
 
 
 DATABASES = {
