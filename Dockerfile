@@ -1,15 +1,15 @@
 
 FROM python:3
-
+ENV PATH ="/scripts:${}PATH"
 WORKDIR /usr/src/app
-ADD requirements.txt /usr/src/app
-RUN pip install -r requirements.txt
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 ADD . /usr/src/app
+
+RUN pip install -r requirements.txt
 
 # collect static files
 RUN python manage.py collectstatic --noinput
