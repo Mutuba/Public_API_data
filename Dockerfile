@@ -1,6 +1,7 @@
 
 FROM python:3
-ENV PATH ="/scripts:${}PATH"
+
+
 WORKDIR /usr/src/app
 
 # set environment variables
