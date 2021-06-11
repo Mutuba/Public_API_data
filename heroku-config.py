@@ -1,5 +1,6 @@
 import os
 
+
 def removeQuotesFromValue(value):
 	value = value.replace("'", '"')
 	# value = value.replace('"', "")

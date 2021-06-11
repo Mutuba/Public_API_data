@@ -12,7 +12,7 @@ from decouple import config
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-PROJECT_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
+# PROJECT_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -72,7 +72,7 @@ SECRET_KEY = '7!@8iekdn*_6e&x8m!mofryeaw775c&%-nc_)z)+p9w5@bw+(n'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     # "authors-haven-api.herokuapp.com",
@@ -118,9 +118,6 @@ TEMPLATE_DIRS = (
 
 PROJECT_ROOT = os.path.join(os.path.abspath(__file__))
 # Extra places for collectstatic to find static files. comment to collect static files into staticfiles
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'staticfiles'),
-)
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -132,6 +129,8 @@ STATIC_URL = "/static/"
 # SECURITY WARNING: keep the secret key used in production secret!
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 TEMPLATES = [
     {
