@@ -45,13 +45,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "public_api_data_app.urls"
 
-
-
-
 WSGI_APPLICATION = "public_api_data_app.wsgi.application"
-
-# Internationalization
-# https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
 
@@ -63,13 +57,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-
-
-
-
-
-SECRET_KEY = '7!@8iekdn*_6e&x8m!mofryeaw775c&%-nc_)z)+p9w5@bw+(n'
+SECRET_KEY = config("SECRET_KEY")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -81,26 +69,26 @@ ALLOWED_HOSTS = [
 ]
 
 
-context_processors = [
-    "django.contrib.auth.context_processors.auth",
-    "django.template.context_processors.debug",
-    "django.template.context_processors.i18n",
-    "django.template.context_processors.media",
-    "django.template.context_processors.static",
-    "django.template.context_processors.tz",
-    "django.contrib.messages.context_processors.messages",
-    "django.template.context_processors.request",
-    "django.template.context_processors.csrf"
+# context_processors = [
+#     "django.contrib.auth.context_processors.auth",
+#     "django.template.context_processors.debug",
+#     "django.template.context_processors.i18n",
+#     "django.template.context_processors.media",
+#     "django.template.context_processors.static",
+#     "django.template.context_processors.tz",
+#     "django.contrib.messages.context_processors.messages",
+#     "django.template.context_processors.request",
+#     "django.template.context_processors.csrf"
 
-]
+# ]
 
-loaders = [
-    "django.template.loaders.filesystem.Loader",
-    "django.template.loaders.app_directories.Loader",
-]
+# loaders = [
+#     "django.template.loaders.filesystem.Loader",
+#     "django.template.loaders.app_directories.Loader",
+# ]
 
-if not DEBUG:
-    loaders = [("django.template.loaders.cached.Loader", loaders)]
+# if not DEBUG:
+#     loaders = [("django.template.loaders.cached.Loader", loaders)]
 
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), 'templates'),
@@ -113,16 +101,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
-)
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = "/static/"
-# SECURITY WARNING: keep the secret key used in production secret!
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 TEMPLATES = [
     {
