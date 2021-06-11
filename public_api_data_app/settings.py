@@ -57,7 +57,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-SECRET_KEY = config("SECRET_KEY")
+SECRET_KEY = "qwertytrtfsdvfeanfbfarghtejyarustidSAFDGSFHDGafdgsfdheafdsgdheADFSGDHEWRRTYEWRATHSADFSGDWEFRGTHsdfghj"
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -67,11 +67,6 @@ ALLOWED_HOSTS = [
     # "authors-haven-api.herokuapp.com",
     "localhost", "127.0.0.1", "publicapidataapp.herokuapp.com"
 ]
-
-
-# c
-
-# Extra places for collectstatic to find static files. comment to collect static files into staticfiles
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -111,27 +106,18 @@ REST_FRAMEWORK = {
 }
 
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "NAME": "postgres",
-#         "USER": "postgres",
-#         "PASSWORD": "postgres",
-#         "HOST": "db_postgres",
-#         "PORT": 5432
-#     }
-# }
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": config("POSTGRES_DB"),
-        "USER": config("POSTGRES_USER"),
-        "PASSWORD": config("POSTGRES_PASSWORD"),
-        "HOST": config("HOST"),
-        "PORT": config("PORT")
+        "NAME": "postgres",
+        "USER": "postgres",
+        "PASSWORD": "postgres",
+        "HOST": "db_postgres",
+        "PORT": 5432
     }
 }
+
+
 
 prod_db = dj_database_url.config(conn_max_age=500)
 
