@@ -69,30 +69,7 @@ ALLOWED_HOSTS = [
 ]
 
 
-context_processors = [
-    "django.contrib.auth.context_processors.auth",
-    "django.template.context_processors.debug",
-    "django.template.context_processors.i18n",
-    "django.template.context_processors.media",
-    "django.template.context_processors.static",
-    "django.template.context_processors.tz",
-    "django.contrib.messages.context_processors.messages",
-    "django.template.context_processors.request",
-    "django.template.context_processors.csrf"
-
-]
-
-loaders = [
-    "django.template.loaders.filesystem.Loader",
-    "django.template.loaders.app_directories.Loader",
-]
-
-if not DEBUG:
-    loaders = [("django.template.loaders.cached.Loader", loaders)]
-
-TEMPLATE_DIRS = (
-    os.path.join(os.path.dirname(__file__), 'templates'),
-)
+# c
 
 # Extra places for collectstatic to find static files. comment to collect static files into staticfiles
 
@@ -101,6 +78,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
+)
 
 STATIC_URL = "/static/"
 
