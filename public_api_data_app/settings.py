@@ -28,7 +28,6 @@ INSTALLED_APPS = [
 ]
 
 
-
 MIDDLEWARE = [
    
     "django.middleware.security.SecurityMiddleware",
@@ -61,21 +60,26 @@ SECRET_KEY = "qwertytrtfsdvfeanfbfarghtejyarustidSAFDGSFHDGafdgsfdheafdsgdheADFS
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
-    # "authors-haven-api.herokuapp.com",
-    "localhost", "127.0.0.1", "publicapidataapp.herokuapp.com"
+    "localhost", "127.0.0.1", "publicapidataapp.herokuapp.com", "web"
 ]
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = "/static/"
+
+STATIC_ROOT = './staticfiles/'
+
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
+
+
+
+
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -117,9 +121,8 @@ DATABASES = {
     }
 }
 
-
-
 prod_db = dj_database_url.config(conn_max_age=500)
 
 DATABASES["default"].update(prod_db)
+
 

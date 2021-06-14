@@ -1,15 +1,33 @@
 version: "3.7"
 
 services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_service
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/usr/src/app
+      - ./config/nginx:/etc/nginx/conf.d
+    depends_on:
+      - web
+    networks:
+      - djangonetwork
   web:
     build: .
     image: mutuba/public_data_api_app
     container_name: public_data_api_app_main
-    command: python3 manage.py runserver 0.0.0.0:8000
+    command:
+      [
+        sh,
+        -c,
+        "python manage.py collectstatic --no-input; python manage.py fetch_dogs_data; gunicorn public_api_data_app.wsgi -b 0.0.0.0:8000",
+      ]
+
     volumes:
       - .:/usr/src/app
     ports:
-      - 127.0.0.1:8000:8000
+      - 8000:8000
     depends_on:
       - db_postgres
       - migrations
@@ -18,6 +36,9 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - HOST=db_postgres
+
+    networks:
+      - djangonetwork
 
   db_postgres:
     image: postgres:12-alpine
@@ -34,6 +55,9 @@ services:
       - POSTGRES_PASSWORD=postgres
       - HOST=db_postgres
 
+    networks:
+      - djangonetwork
+
   migrations:
     build: .
     command: python3 manage.py migrate
@@ -49,6 +73,13 @@ services:
 
     depends_on:
       - db_postgres
+
+    networks:
+      - djangonetwork
+
+networks:
+  djangonetwork:
+    driver: bridge
 
 volumes:
   postgres_data:
