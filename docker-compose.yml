@@ -21,7 +21,7 @@ services:
       [
         sh,
         -c,
-        "python manage.py collectstatic --no-input; python manage.py fetch_dogs_data; gunicorn public_api_data_app.wsgi -b 0.0.0.0:8000",
+        "python manage.py collectstatic --no-input; python manage.py fetch_dogs_data; python manage.py runserver 0.0.0.0:8000",
       ]
 
     volumes:

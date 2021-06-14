@@ -12,9 +12,6 @@ RUN apk update && apk add --no-cache \
     postgresql \
     zlib \
     jpeg 
-# un-comment the following two dependecies if you want to add library like pandas, scipy and numpy
-# openblas \ 
-# libstdc++ 
 
 # Installing temporary packages required for installing requirements.pip 
 RUN apk add --no-cache --virtual build-deps \
