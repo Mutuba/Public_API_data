@@ -28,7 +28,7 @@ class Dog(models.Model):
     temperament = models.TextField(null=True, blank=True)
 
     prepopulated_fields = {"slug": ("name",)}
-
+    
     def _get_unique_slug(self):
         slug = slugify(self.name)
         unique_slug = slug
@@ -46,6 +46,15 @@ class Dog(models.Model):
         """
         self.slug = self._get_unique_slug()
         super(Dog, self).save(*args, **kwargs)
+        
+        
+    # def long_life_span_dogs(self):
+    #     Dog.objects.
+        
+        
+    # @classmethod
+    # def successful(cls):
+    #     return cls.objects.get(code=0)
 
     def __str__(self):
         """Returns a name of the dog as object representation"""

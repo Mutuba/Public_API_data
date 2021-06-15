@@ -24,7 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",  # required for serving swagger ui's css/js files
     "drf_yasg",
     "apps.dogs",
-    'storages', # New
+    'storages', 
 ]
 
 
@@ -60,7 +60,7 @@ SECRET_KEY = "qwertytrtfsdvfeanfbfarghtejyarustidSAFDGSFHDGafdgsfdheafdsgdheADFS
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "localhost", "127.0.0.1", "publicapidataapp.herokuapp.com", "web"
@@ -99,7 +99,6 @@ TEMPLATES = [
 ]
 
 REST_FRAMEWORK = {
-    "EXCEPTION_HANDLER": "apps.core.exceptions.core_exception_handler",
     "NON_FIELD_ERRORS_KEY": "error",
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
@@ -118,6 +117,7 @@ DATABASES = {
         "PORT": 5432
     }
 }
+
 
 prod_db = dj_database_url.config(conn_max_age=500)
 
