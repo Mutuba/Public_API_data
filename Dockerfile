@@ -1,7 +1,6 @@
 
 FROM python:3.7-alpine
 
-
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV C_FORCE_ROOT true

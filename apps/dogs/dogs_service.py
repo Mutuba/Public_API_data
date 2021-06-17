@@ -18,5 +18,5 @@ def seed_dogs_data():
             serializer.save()
 
 
-def clear_data():
+def clear_dogs_data():
     Dog.objects.all().delete()

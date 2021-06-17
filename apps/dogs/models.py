@@ -47,14 +47,6 @@ class Dog(models.Model):
         self.slug = self._get_unique_slug()
         super(Dog, self).save(*args, **kwargs)
         
-        
-    # def long_life_span_dogs(self):
-    #     Dog.objects.
-        
-        
-    # @classmethod
-    # def successful(cls):
-    #     return cls.objects.get(code=0)
 
     def __str__(self):
         """Returns a name of the dog as object representation"""
